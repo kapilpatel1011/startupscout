@@ -1,22 +1,43 @@
 import 'package:flutter/material.dart';
-import 'package:startupscout/views/home/HomeScreen.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:startupscout/routes/app_pages.dart';
+import 'package:startupscout/routes/app_routes.dart';
+import 'package:startupscout/utils/app_constants.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+  ]);
+
+  runApp(const StartupScout());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class StartupScout extends StatelessWidget {
+  const StartupScout({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Startup Scout',
-      theme: ThemeData(
-
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+    return  ScreenUtilInit(
+      designSize: const Size(360, 690),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      child: GetMaterialApp(
+        title: "DOC",
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+            scaffoldBackgroundColor: AppConstants.backgroundColor,
+            textTheme: GoogleFonts.ubuntuTextTheme(),
+            colorScheme: ColorScheme.fromSeed(seedColor: AppConstants.primaryColor,
+              surface: AppConstants.backgroundColor,
+            )
+        ),
+        initialRoute: AppRoutes.homescreen,
+        getPages: AppPages.pages,
       ),
-      home: const HomeScreen(),
     );
   }
 }
