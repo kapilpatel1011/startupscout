@@ -41,6 +41,7 @@ dependencies:
   lottie: ^3.3.2
   flutter_screenutil: ^5.9.3
   logger: ^2.6.2
+  share_plus: ^12.0.1
 
 dev_dependencies:
   flutter_test:

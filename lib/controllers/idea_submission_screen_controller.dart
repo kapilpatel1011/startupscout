@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:startupscout/utils/app_constants.dart';
+import 'package:startupscout/views/ideas/ideas_list_screen.dart';
 
 import '../models/idea_model.dart';
+import '../views/bottom navigation/bottom_navigation_screen.dart';
+import '../views/ideas/idea_submission_screen.dart';
 
 class IdeaSubmissionScreenController extends GetxController {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -36,7 +40,9 @@ class IdeaSubmissionScreenController extends GetxController {
 
   void submitForm() {
     if (formKey.currentState!.validate()) {
+      final int uniqueId = DateTime.now().millisecondsSinceEpoch;
       final newIdea = IdeaModel(
+        key: uniqueId,
         name: nameController.text,
         tagline: taglineController.text,
         category: selectedCategory.value,
@@ -46,11 +52,6 @@ class IdeaSubmissionScreenController extends GetxController {
       ideas.add(newIdea);
       storage.write(ideasKey, ideas.map((e) => e.toJson()).toList());
 
-      nameController.clear();
-      taglineController.clear();
-      descController.clear();
-      selectedCategory.value = "Tech";
-
       Get.snackbar(
         "Success!",
         "${nameController.text} has been submitted for AI review.",
@@ -58,7 +59,33 @@ class IdeaSubmissionScreenController extends GetxController {
         backgroundColor: Colors.green,
         colorText: Colors.white,
       );
+      Get.to(() => BottomNavigationScreen());
+      nameController.clear();
+      taglineController.clear();
+      descController.clear();
+      selectedCategory.value = "Tech";
     }
+  }
+
+  void deleteIdea(int id) {
+    ideas.removeWhere((idea) => idea.key == id);
+    storage.write(ideasKey, ideas.map((e) => e.toJson()).toList());
+    Get.snackbar("Deleted!", "Idea has been deleted.");
+  }
+
+  void shareIdea(int id) {
+    var idea = ideas.firstWhere((element) => element.key == id);
+    String message =
+        "🚀 Check out this startup idea!\n\n"
+        "🔹 Name: ${idea.name}\n"
+        "🏷 Tagline: ${idea.tagline}\n"
+        "📂 Category: ${idea.category}\n\n"
+        "📝 Description:\n${idea.description}\n\n"
+        "Shared via Startup Scout App";
+
+    SharePlus.instance.share(
+      ShareParams(subject: "Startup Idea", text: message),
+    );
   }
 
   @override

@@ -13,7 +13,11 @@ class WgListTile extends StatelessWidget {
   final int? upvotes;
   final int? commentCount; // Added optional comments
   final double? rating;
+  final bool isLiked;
   final VoidCallback onTap;
+
+  final VoidCallback onThumbUpTap;
+
 
   const WgListTile({
     super.key,
@@ -23,8 +27,10 @@ class WgListTile extends StatelessWidget {
     required this.category,
     required this.onTap,
     this.upvotes = 0,
-    this.commentCount, // Optional
+    this.commentCount,
     this.rating,
+    this.isLiked = false,
+    required this.onThumbUpTap,
   });
 
   @override
@@ -32,35 +38,31 @@ class WgListTile extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        margin: EdgeInsets.only(bottom: 12.h), // Reduced margin slightly
+        margin: EdgeInsets.only(bottom: 12.h),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(16.r),
-          // REMOVED SHADOW, ADDED BORDER
-          border: Border.all(color: AppConstants.primaryBlackColor.withValues(), width: 1),
+          border: Border.all(color: AppConstants.primaryBlackColor.withValues(), width: 0.2),
         ),
         child: Padding(
           padding: EdgeInsets.all(16.w),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // --- Header: Icon + Name + Tagline + Score ---
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // 1. Startup Icon / Avatar
                   Container(
                     height: 30.h,
                     width: 30.w,
                     decoration: BoxDecoration(
-                      color: AppConstants.primaryColor.withOpacity(0.1),
                       borderRadius: BorderRadius.circular(12.r),
                     ),
                     child: Center(
                       child: Text(
                         title.isNotEmpty ? title[0].toUpperCase() : "?",
                         style: GoogleFonts.poppins(
-                          fontSize: 20.sp, // REDUCED FONT SIZE (Was 24)
+                          fontSize: 20.sp,
                           fontWeight: FontWeight.bold,
                           color: AppConstants.primaryColor,
                         ),
@@ -69,7 +71,6 @@ class WgListTile extends StatelessWidget {
                   ),
                   SizedBox(width: 12.w),
 
-                  // 2. Name & Tagline
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -88,7 +89,7 @@ class WgListTile extends StatelessWidget {
                           tagline,
                           style: GoogleFonts.poppins(
                             fontSize: 12.sp,
-                            fontWeight: FontWeight.w400, // REMOVED ITALIC
+                            fontWeight: FontWeight.w400,
                             color: Colors.grey,
                           ),
                           maxLines: 1,
@@ -98,35 +99,10 @@ class WgListTile extends StatelessWidget {
                     ),
                   ),
 
-                  // 3. Rating Badge (Optional)
-                  if (rating != null)
-                    Container(
-                      padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
-                      decoration: BoxDecoration(
-                        color: _getRatingColor(rating!).withOpacity(0.1),
-                        borderRadius: BorderRadius.circular(8.r),
-                      ),
-                      child: Row(
-                        children: [
-                          Icon(Icons.star, size: 12.sp, color: _getRatingColor(rating!)),
-                          SizedBox(width: 4.w),
-                          Text(
-                            rating.toString(),
-                            style: GoogleFonts.poppins(
-                              fontSize: 12.sp,
-                              fontWeight: FontWeight.bold,
-                              color: _getRatingColor(rating!),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
                 ],
               ),
 
               SizedBox(height: 12.h),
-
-              // --- Body: Description ---
               Text(
                 description,
                 style: GoogleFonts.poppins(
@@ -141,22 +117,18 @@ class WgListTile extends StatelessWidget {
               SizedBox(height: 16.h),
               Divider(color: Colors.grey.withOpacity(0.1), height: 1),
               SizedBox(height: 12.h),
-
-              // --- Footer: Category + Upvotes + Comments ---
               Row(
                 children: [
-                  // Category Tag WITH ICON
                   Container(
                     padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
                     decoration: BoxDecoration(
-                      color: Colors.blue.withOpacity(0.08),
                       borderRadius: BorderRadius.circular(20.r),
-                      border: Border.all(color: Colors.blue.withOpacity(0.2)),
+                      border: Border.all(color: AppConstants.primaryColor.withValues(), width: 0.2),
                     ),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Icon(Icons.layers_outlined, size: 12.sp, color: AppConstants.primaryColor), // ADDED ICON
+                        Icon(Icons.category_outlined, size: 12.sp, color: AppConstants.primaryColor), // ADDED ICON
                         SizedBox(width: 4.w),
                         Text(
                           category,
@@ -165,17 +137,39 @@ class WgListTile extends StatelessWidget {
                             fontWeight: FontWeight.w500,
                           ),
                         ),
+
+
+
                       ],
                     ),
                   ),
 
                   const Spacer(),
-
-                  // Upvotes Count
                   Row(
                     children: [
-                      Icon(Icons.thumb_up_alt_outlined, size: 16.sp),
-                      SizedBox(width: 6.w),
+                      if (rating != null)
+                        Container(
+                          padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
+                          decoration: BoxDecoration(
+                            color: _getRatingColor(rating!).withOpacity(0.1),
+                            borderRadius: BorderRadius.circular(8.r),
+                          ),
+                          child: Row(
+                            children: [
+                              Icon(Icons.auto_awesome, size: 12.sp, color: _getRatingColor(rating!)),
+                              SizedBox(width: 4.w),
+                              Text(
+                                rating.toString(),
+                                style: GoogleFonts.poppins(
+                                  fontSize: 12.sp,
+                                  fontWeight: FontWeight.bold,
+                                  color: _getRatingColor(rating!),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      IconButton(onPressed: onThumbUpTap , icon: Icon(isLiked ? Icons.thumb_up :Icons.thumb_up_alt_outlined, size: 16.sp)),
                       Text(
                         "$upvotes",
                         style: GoogleFonts.poppins(
@@ -186,8 +180,6 @@ class WgListTile extends StatelessWidget {
                       ),
                     ],
                   ),
-
-                  // Optional Comments Icon (Only shows if commentCount is passed)
                   if (commentCount != null) ...[
                     SizedBox(width: 16.w),
                     Row(
@@ -215,8 +207,8 @@ class WgListTile extends StatelessWidget {
   }
 
   Color _getRatingColor(double score) {
-    if (score >= 4.5) return Colors.green;
-    if (score >= 3.0) return Colors.orange;
+    if (score >= 80) return Colors.green;
+    if (score >= 30) return Colors.orange;
     return Colors.red;
   }
 }
