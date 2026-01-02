@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-// Ensure you have these imports in your actual file
 import '../../utils/app_constants.dart';
 
 class WgListTile extends StatelessWidget {
@@ -11,13 +9,12 @@ class WgListTile extends StatelessWidget {
   final String description;
   final String category;
   final int? upvotes;
-  final int? commentCount; // Added optional comments
+  final int? commentCount;
   final double? rating;
   final bool isLiked;
   final VoidCallback onTap;
 
   final VoidCallback onThumbUpTap;
-
 
   const WgListTile({
     super.key,
@@ -42,7 +39,10 @@ class WgListTile extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(16.r),
-          border: Border.all(color: AppConstants.primaryBlackColor.withValues(), width: 0.2),
+          border: Border.all(
+            color: AppConstants.primaryBlackColor.withValues(),
+            width: 0.2,
+          ),
         ),
         child: Padding(
           padding: EdgeInsets.all(16.w),
@@ -61,7 +61,7 @@ class WgListTile extends StatelessWidget {
                     child: Center(
                       child: Text(
                         title.isNotEmpty ? title[0].toUpperCase() : "?",
-                        style: GoogleFonts.poppins(
+                        style: GoogleFonts.ubuntu(
                           fontSize: 20.sp,
                           fontWeight: FontWeight.bold,
                           color: AppConstants.primaryColor,
@@ -77,7 +77,7 @@ class WgListTile extends StatelessWidget {
                       children: [
                         Text(
                           title,
-                          style: GoogleFonts.poppins(
+                          style: GoogleFonts.ubuntu(
                             fontSize: 16.sp,
                             fontWeight: FontWeight.w600,
                             color: Colors.black87,
@@ -87,7 +87,7 @@ class WgListTile extends StatelessWidget {
                         ),
                         Text(
                           tagline,
-                          style: GoogleFonts.poppins(
+                          style: GoogleFonts.ubuntu(
                             fontSize: 12.sp,
                             fontWeight: FontWeight.w400,
                             color: Colors.grey,
@@ -98,19 +98,19 @@ class WgListTile extends StatelessWidget {
                       ],
                     ),
                   ),
-
                 ],
               ),
 
               SizedBox(height: 12.h),
               Text(
                 description,
-                style: GoogleFonts.poppins(
+                softWrap: true,
+                style: GoogleFonts.ubuntu(
                   fontSize: 13.sp,
                   color: Colors.grey[700],
                   height: 1.4,
                 ),
-                maxLines: 2,
+                maxLines: 4,
                 overflow: TextOverflow.ellipsis,
               ),
 
@@ -120,26 +120,33 @@ class WgListTile extends StatelessWidget {
               Row(
                 children: [
                   Container(
-                    padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 10.w,
+                      vertical: 4.h,
+                    ),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20.r),
-                      border: Border.all(color: AppConstants.primaryColor.withValues(), width: 0.2),
+                      border: Border.all(
+                        color: AppConstants.primaryColor.withValues(),
+                        width: 0.2,
+                      ),
                     ),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Icon(Icons.category_outlined, size: 12.sp, color: AppConstants.primaryColor), // ADDED ICON
+                        Icon(
+                          Icons.category_outlined,
+                          size: 12.sp,
+                          color: AppConstants.primaryColor,
+                        ),
                         SizedBox(width: 4.w),
                         Text(
                           category,
-                          style: GoogleFonts.poppins(
+                          style: GoogleFonts.ubuntu(
                             fontSize: 11.sp,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
-
-
-
                       ],
                     ),
                   ),
@@ -149,18 +156,25 @@ class WgListTile extends StatelessWidget {
                     children: [
                       if (rating != null)
                         Container(
-                          padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 8.w,
+                            vertical: 4.h,
+                          ),
                           decoration: BoxDecoration(
                             color: _getRatingColor(rating!).withOpacity(0.1),
                             borderRadius: BorderRadius.circular(8.r),
                           ),
                           child: Row(
                             children: [
-                              Icon(Icons.auto_awesome, size: 12.sp, color: _getRatingColor(rating!)),
+                              Icon(
+                                Icons.auto_awesome,
+                                size: 12.sp,
+                                color: _getRatingColor(rating!),
+                              ),
                               SizedBox(width: 4.w),
                               Text(
                                 rating.toString(),
-                                style: GoogleFonts.poppins(
+                                style: GoogleFonts.ubuntu(
                                   fontSize: 12.sp,
                                   fontWeight: FontWeight.bold,
                                   color: _getRatingColor(rating!),
@@ -169,10 +183,18 @@ class WgListTile extends StatelessWidget {
                             ],
                           ),
                         ),
-                      IconButton(onPressed: onThumbUpTap , icon: Icon(isLiked ? Icons.thumb_up :Icons.thumb_up_alt_outlined, size: 16.sp)),
+                      IconButton(
+                        onPressed: onThumbUpTap,
+                        icon: Icon(
+                          isLiked
+                              ? Icons.thumb_up
+                              : Icons.thumb_up_alt_outlined,
+                          size: 16.sp,
+                        ),
+                      ),
                       Text(
                         "$upvotes",
-                        style: GoogleFonts.poppins(
+                        style: GoogleFonts.ubuntu(
                           fontSize: 12.sp,
                           color: Colors.grey[600],
                           fontWeight: FontWeight.w500,
@@ -184,11 +206,15 @@ class WgListTile extends StatelessWidget {
                     SizedBox(width: 16.w),
                     Row(
                       children: [
-                        Icon(Icons.chat_bubble_outline_rounded, size: 16.sp, color: Colors.grey[400]),
+                        Icon(
+                          Icons.chat_bubble_outline_rounded,
+                          size: 16.sp,
+                          color: Colors.grey[400],
+                        ),
                         SizedBox(width: 6.w),
                         Text(
                           "$commentCount",
-                          style: GoogleFonts.poppins(
+                          style: GoogleFonts.ubuntu(
                             fontSize: 12.sp,
                             color: Colors.grey[600],
                             fontWeight: FontWeight.w500,
@@ -196,7 +222,7 @@ class WgListTile extends StatelessWidget {
                         ),
                       ],
                     ),
-                  ]
+                  ],
                 ],
               ),
             ],

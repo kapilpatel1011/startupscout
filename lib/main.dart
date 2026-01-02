@@ -8,13 +8,10 @@ import 'package:startupscout/routes/app_pages.dart';
 import 'package:startupscout/routes/app_routes.dart';
 import 'package:startupscout/utils/app_constants.dart';
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-  ]);
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   await GetStorage.init();
-
   runApp(const StartupScout());
 }
 
@@ -23,7 +20,7 @@ class StartupScout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  ScreenUtilInit(
+    return ScreenUtilInit(
       designSize: const Size(360, 690),
       minTextAdapt: true,
       splitScreenMode: true,
@@ -31,11 +28,12 @@ class StartupScout extends StatelessWidget {
         title: "Startup Scout",
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-            scaffoldBackgroundColor: AppConstants.backgroundColor,
-            textTheme: GoogleFonts.ubuntuTextTheme(),
-            colorScheme: ColorScheme.fromSeed(seedColor: AppConstants.primaryColor,
-              surface: AppConstants.backgroundColor,
-            )
+          scaffoldBackgroundColor: AppConstants.backgroundColor,
+          textTheme: GoogleFonts.ubuntuTextTheme(),
+          colorScheme: ColorScheme.fromSeed(
+            seedColor: AppConstants.primaryColor,
+            surface: AppConstants.backgroundColor,
+          ),
         ),
         initialRoute: AppRoutes.splashscreen,
         getPages: AppPages.pages,
@@ -43,6 +41,3 @@ class StartupScout extends StatelessWidget {
     );
   }
 }
-
-
-

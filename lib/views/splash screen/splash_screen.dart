@@ -8,7 +8,7 @@ import 'package:startupscout/controllers/splash_screen_controller.dart';
 import '../../utils/app_constants.dart';
 
 class SplashScreen extends StatelessWidget {
-   SplashScreen({super.key});
+  SplashScreen({super.key});
   final SplashScreenController controller = Get.put(SplashScreenController());
 
   @override
@@ -20,8 +20,18 @@ class SplashScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset("assets/images/splash.png",height: 100.h,width: 100.w,),
-              Text("Startup Scout",style: GoogleFonts.ubuntu(fontSize: 30.sp,color: AppConstants.primaryWhiteColor),),
+              Image.asset(
+                "assets/images/splash.png",
+                height: 100.h,
+                width: 100.w,
+              ),
+              Text(
+                "Startup Scout",
+                style: GoogleFonts.ubuntu(
+                  fontSize: 30.sp,
+                  color: AppConstants.primaryWhiteColor,
+                ),
+              ),
             ],
           ),
         ),

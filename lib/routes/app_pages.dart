@@ -7,15 +7,15 @@ import '../bindings/bottom_nav_binding.dart';
 import '../views/home/HomeScreen.dart';
 import 'app_routes.dart';
 
-class AppPages{
-
+class AppPages {
   static final pages = [
-    GetPage(name: AppRoutes.splashscreen, page: () => SplashScreen(),),
-    GetPage(name: AppRoutes.onboardingscreen, page: () => OnboardingScreen(),),
-    GetPage(name: AppRoutes.bottomnavigation, page: () => const BottomNavigationScreen(),binding: BottomNavBinding()),
-    GetPage(name: AppRoutes.homescreen, page: () =>  HomeScreen()),
+    GetPage(name: AppRoutes.splashscreen, page: () => SplashScreen()),
+    GetPage(name: AppRoutes.onboardingscreen, page: () => OnboardingScreen()),
+    GetPage(
+      name: AppRoutes.bottomnavigation,
+      page: () => const BottomNavigationScreen(),
+      binding: BottomNavBinding(),
+    ),
+    GetPage(name: AppRoutes.homescreen, page: () => HomeScreen()),
   ];
-
-
-
 }

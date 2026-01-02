@@ -18,7 +18,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(12.0),
           child: Column(
             children: [
               Row(
@@ -29,26 +29,19 @@ class HomeScreen extends StatelessWidget {
                       TextSpan(
                         text: "Startup",
                         style: GoogleFonts.ubuntu(
-                          fontSize: 20.sp,
+                          fontSize: 25.sp,
                           color: AppConstants.primaryBlackColor,
                         ),
                       ),
                       TextSpan(
                         text: "Scout",
                         style: GoogleFonts.ubuntu(
-                          fontSize: 20.sp,
+                          fontSize: 25.sp,
                           color: AppConstants.primaryColor,
                         ),
                       ),
                     ],
                   ),
-                  IconButton(
-                    onPressed: () {
-                    },
-                    icon: Icon(
-                   Icons.light_mode
-                    ),
-                  )
                 ],
               ),
               Align(

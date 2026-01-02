@@ -16,7 +16,7 @@ class IdeaSubmissionScreenController extends GetxController {
   final TextEditingController descController = TextEditingController();
   var selectedCategory = "Tech".obs;
 
-  final List<String> categories = ["Tech", "Health", "Finance", "Education"];
+  final List<String> categories = ["Tech", "Health", "Finance", "Education","Other"];
 
   var ideas = <IdeaModel>[].obs;
   var isLoading = false.obs;
@@ -55,11 +55,11 @@ class IdeaSubmissionScreenController extends GetxController {
       Get.snackbar(
         "Success!",
         "${nameController.text} has been submitted for AI review.",
-        snackPosition: SnackPosition.BOTTOM,
+        snackPosition: SnackPosition.TOP,
         backgroundColor: Colors.green,
         colorText: Colors.white,
       );
-      Get.to(() => BottomNavigationScreen());
+      Get.to(() => IdeasListScreen());
       nameController.clear();
       taglineController.clear();
       descController.clear();
@@ -70,7 +70,10 @@ class IdeaSubmissionScreenController extends GetxController {
   void deleteIdea(int id) {
     ideas.removeWhere((idea) => idea.key == id);
     storage.write(ideasKey, ideas.map((e) => e.toJson()).toList());
-    Get.snackbar("Deleted!", "Idea has been deleted.");
+    Get.snackbar("Deleted!", "Idea has been deleted.",
+      backgroundColor: Colors.green,
+      colorText: Colors.white,
+    );
   }
 
   void shareIdea(int id) {
@@ -79,8 +82,8 @@ class IdeaSubmissionScreenController extends GetxController {
         "🚀 Check out this startup idea!\n\n"
         "🔹 Name: ${idea.name}\n"
         "🏷 Tagline: ${idea.tagline}\n"
-        "📂 Category: ${idea.category}\n\n"
-        "📝 Description:\n${idea.description}\n\n"
+        "📂 Category: ${idea.category}\n"
+        "📝 Description:${idea.description}\n\n"
         "Shared via Startup Scout App";
 
     SharePlus.instance.share(

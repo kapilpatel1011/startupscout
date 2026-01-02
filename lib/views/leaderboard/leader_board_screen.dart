@@ -18,15 +18,14 @@ class LeaderBoardScreen extends StatelessWidget {
       child: Scaffold(
         backgroundColor: Colors.grey.shade50,
         appBar: AppBar(
-          centerTitle: true,
           backgroundColor: Colors.white,
-          elevation: 0, // Explicitly set to 0
-          scrolledUnderElevation: 0, // Ensures it stays flat even when scrolling
+          elevation: 0,
+          scrolledUnderElevation: 0,
           title: Text(
-            "Best Startup Idea",
+            "Top Startup Idea",
             style: GoogleFonts.ubuntu(
               color: Colors.black,
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.w500,
               fontSize: 20.sp,
             ),
           ),
@@ -36,7 +35,7 @@ class LeaderBoardScreen extends StatelessWidget {
             indicatorColor: AppConstants.primaryColor,
             indicatorWeight: 3,
             labelStyle: GoogleFonts.poppins(fontWeight: FontWeight.w600),
-            dividerColor: Colors.transparent, // Removes the divider line
+            dividerColor: Colors.transparent,
             tabs: const [
               Tab(text: "Top Voted"),
               Tab(text: "Top AI Rated"),
@@ -73,16 +72,12 @@ class LeaderBoardScreen extends StatelessWidget {
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(16.r),
-            // Gold border for #1
             border: rank == 1 ? Border.all(color: const Color(0xFFFFD700), width: 2) : null,
           ),
           child: Row(
             children: [
-              // Rank Badge
               _buildRankBadge(rank),
               SizedBox(width: 16.w),
-
-              // Content
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -107,8 +102,6 @@ class LeaderBoardScreen extends StatelessWidget {
                   ],
                 ),
               ),
-
-              // Score/Votes Display
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
                 decoration: BoxDecoration(
@@ -151,15 +144,15 @@ class LeaderBoardScreen extends StatelessWidget {
 
     switch (rank) {
       case 1:
-        color = const Color(0xFFFFD700); // Gold
+        color = const Color(0xFFFFD700);
         icon = Icons.emoji_events;
         break;
       case 2:
-        color = const Color(0xFFC0C0C0); // Silver
+        color = const Color(0xFFC0C0C0);
         icon = Icons.looks_two;
         break;
       case 3:
-        color = const Color(0xFFCD7F32); // Bronze
+        color = const Color(0xFFCD7F32);
         icon = Icons.looks_3;
         break;
       default:
@@ -169,7 +162,6 @@ class LeaderBoardScreen extends StatelessWidget {
 
     if (rank <= 3) {
       return CircleAvatar(
-        // UPDATED: Using withValues instead of withOpacity
         backgroundColor: color.withValues(alpha: 0.2),
         radius: 22.r,
         child: Icon(icon, color: color, size: 24.sp),

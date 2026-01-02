@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:startupscout/views/widgets/wg_button.dart';
 import 'package:startupscout/views/widgets/wg_header.dart';
 import '../../controllers/idea_submission_screen_controller.dart';
-import '../../utils/app_constants.dart';
 
 class IdeaSubmissionScreen extends StatelessWidget {
   const IdeaSubmissionScreen({super.key});
@@ -14,7 +13,7 @@ class IdeaSubmissionScreen extends StatelessWidget {
     final IdeaSubmissionScreenController controller = Get.put(IdeaSubmissionScreenController());
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(12.0),
         child: Form(
           key: controller.formKey,
           child: SingleChildScrollView(

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -14,8 +13,8 @@ class OnboardingScreen extends StatelessWidget {
     OnBoardingData(
       title1: "Validate your, ",
       title2: "idea",
-      description1: "Pitch a startup idea anytime, anywhere", // 6 words
-      description2: "pitch,vote & grow", // 3 words
+      description1: "Pitch a startup idea anytime, anywhere",
+      description2: "pitch,vote & grow",
       image: "assets/images/img_1.png",
     ),
     OnBoardingData(
@@ -81,15 +80,14 @@ class OnboardingScreen extends StatelessWidget {
                 SizedBox(width: 20.h),
                 ...List.generate(
                   onBoardingList.length,
-                      (index) => Obx(
-                        () => Container(
+                  (index) => Obx(
+                    () => Container(
                       height: 7.h,
                       width: 7.w,
                       decoration: BoxDecoration(
                         color: _controller.currentPageIndex.value == index
-                            ? AppConstants
-                            .primaryColor // active dot
-                            : Colors.grey, // inactive dot
+                            ? AppConstants.primaryColor
+                            : Colors.grey,
                         borderRadius: BorderRadius.circular(30.r),
                       ),
                     ),
@@ -107,7 +105,6 @@ class OnboardingScreen extends StatelessWidget {
               ],
             ),
             SizedBox(height: 20.h),
-
           ],
         ),
       ),
@@ -118,7 +115,6 @@ class OnboardingScreen extends StatelessWidget {
 ///Onboarding Controller class
 class OnboardingController extends GetxController {
   var currentPageIndex = 0.obs;
-
 
   final storage = GetStorage();
   final String isFirstTimeKey = 'isFirstTime';
@@ -135,9 +131,11 @@ class OnboardingController extends GetxController {
       finishedOnboarding();
     }
   }
+
   void skip() {
     finishedOnboarding();
   }
+
   void finishedOnboarding() {
     storage.write(isFirstTimeKey, false);
     Get.offAllNamed(AppRoutes.bottomnavigation);

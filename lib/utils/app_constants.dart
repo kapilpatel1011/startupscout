@@ -2,12 +2,11 @@ import 'dart:ui';
 
 import 'package:logger/logger.dart';
 
-
-class AppConstants{
+class AppConstants {
   ///universal logger
   static final logger = Logger();
 
-  static void logInfo(String message){
+  static void logInfo(String message) {
     logger.i(message);
   }
 
@@ -20,6 +19,4 @@ class AppConstants{
   static const Color primaryBlackColor = Color(0xFF000000);
   static const Color primaryGreyColor = Color(0xFFFFE0E0);
   static const Color secondaryTextColor = Color(0xFF8A8989);
-
-
 }

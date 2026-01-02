@@ -37,16 +37,17 @@ class TrendingIdeaModel {
     'createdAt': createdAt.toIso8601String(),
   };
 
-  factory TrendingIdeaModel.fromJson(Map<String, dynamic> json) => TrendingIdeaModel(
-    id: json['id'],
-    name: json['name'],
-    tagline: json['tagline'],
-    description: json['description'],
-    rating: json['rating'],
-    aiFeedback: json['aiFeedback'],
-    upvotes: json['upvotes'],
-    isUpvoted: json['isUpvoted'],
-    category: json['category'],
-    createdAt: DateTime.parse(json['createdAt']),
-  );
+  factory TrendingIdeaModel.fromJson(Map<String, dynamic> json) =>
+      TrendingIdeaModel(
+        id: json['id'],
+        name: json['name'],
+        tagline: json['tagline'],
+        description: json['description'],
+        rating: json['rating'],
+        aiFeedback: json['aiFeedback'],
+        upvotes: json['upvotes'],
+        isUpvoted: json['isUpvoted'],
+        category: json['category'],
+        createdAt: DateTime.parse(json['createdAt']),
+      );
 }
