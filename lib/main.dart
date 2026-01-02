@@ -37,7 +37,7 @@ class StartupScout extends StatelessWidget {
               surface: AppConstants.backgroundColor,
             )
         ),
-        initialRoute: AppRoutes.onboardingscreen,
+        initialRoute: AppRoutes.splashscreen,
         getPages: AppPages.pages,
       ),
     );

@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../routes/app_routes.dart';
 import '../../utils/app_constants.dart';
 import '../widgets/wg_onboarding.dart';
 
@@ -118,7 +119,9 @@ class OnboardingScreen extends StatelessWidget {
 class OnboardingController extends GetxController {
   var currentPageIndex = 0.obs;
 
-  final box = GetStorage();
+
+  final storage = GetStorage();
+  final String isFirstTimeKey = 'isFirstTime';
   PageController pageController = PageController();
 
   void nextPages(int totalPage) {
@@ -136,13 +139,8 @@ class OnboardingController extends GetxController {
     finishedOnboarding();
   }
   void finishedOnboarding() {
-    box.write('isFirstTime', false);
-    final token = box.read('token');
-    if (token != null) {
-      Get.offAllNamed('/navigation'); // Or AppRoutes.navigation
-    } else {
-      Get.offAllNamed('/login'); // Or AppRoutes.login
-    }
+    storage.write(isFirstTimeKey, false);
+    Get.offAllNamed(AppRoutes.bottomnavigation);
   }
 }
 

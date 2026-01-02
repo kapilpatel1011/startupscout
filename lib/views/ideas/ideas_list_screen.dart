@@ -17,13 +17,7 @@ class IdeasListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final BottomNavigationContoller bottomNavController = Get.find();
-    return PopScope(
-      canPop: false,
-      onPopInvokedWithResult: (didPop, result) {
-        if (didPop) return;
-        bottomNavController.changePage(0);
-      },
-      child: Scaffold(
+    return Scaffold(
         body: SafeArea(
           child: Padding(
             padding: EdgeInsets.all(8.0),
@@ -143,7 +137,6 @@ class IdeasListScreen extends StatelessWidget {
             ),
           ),
         ),
-      ),
-    );
+      );
   }
 }
