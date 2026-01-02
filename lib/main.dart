@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:startupscout/routes/app_pages.dart';
 import 'package:startupscout/routes/app_routes.dart';
@@ -12,6 +13,7 @@ void main() async{
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
+  await GetStorage.init();
 
   runApp(const StartupScout());
 }
@@ -26,7 +28,7 @@ class StartupScout extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       child: GetMaterialApp(
-        title: "DOC",
+        title: "Startup Scout",
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
             scaffoldBackgroundColor: AppConstants.backgroundColor,
@@ -35,7 +37,7 @@ class StartupScout extends StatelessWidget {
               surface: AppConstants.backgroundColor,
             )
         ),
-        initialRoute: AppRoutes.homescreen,
+        initialRoute: AppRoutes.bottomnavigation,
         getPages: AppPages.pages,
       ),
     );
