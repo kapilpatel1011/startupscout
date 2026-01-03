@@ -51,7 +51,7 @@ lib/
 ├── views/            # UI Screens (Onboarding, Home, Form)
 │   └── widgets/      # Reusable components (WgListTile, WgButton)
 └── main.dart         # App Entry point
-
+```
 🚀 How to Run the Project
 Follow these steps to get the app running on your local machine.
 
@@ -84,7 +84,7 @@ You can download and install the APK from the link below:
 
 🔗[Download Startup Scout APK](https://drive.google.com/file/d/1qNMl6LWgORv3z2EoQIko3Y3OgPX8APMb/view?usp=sharing)
 
-> Note: Enable "Install from Unknown Sources" to install the app.
+⚠️ Note: Enable "Install from Unknown Sources" to install the app.
 
 👨‍💻 Author
 Kapil Patel
