@@ -55,7 +55,7 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 10.h),
-              Image.asset("assets/images/img.png"),
+              Image.asset("assets/images/hero.png"),
               SizedBox(height: 10.h),
               Align(
                 alignment: Alignment.centerLeft,
